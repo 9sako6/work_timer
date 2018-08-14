@@ -1,9 +1,12 @@
 # WorkTimer
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/c1aa0d29cfb926decd44/maintainability)](https://codeclimate.com/github/9sako6/work_timer/maintainability)
+
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/work_timer`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
-
+This gem measures time.
+![demo](demo.gif)
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,8 +24,21 @@ Or install it yourself as:
     $ gem install work_timer
 
 ## Usage
+**Run:**
 
-TODO: Write usage instructions here
+```
+$ work_timer
+```
+If you don't specify a logfile, your working log is saved in ```work_timer_default.log```.
+
+You can specify the file to save your log:
+```
+$ ./work_timer.rb <LOG_FILE_PATH>
+```
+
+
+**Quit:**
+input ```q```
 
 ## Development
 
