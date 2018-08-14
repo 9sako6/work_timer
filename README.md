@@ -3,8 +3,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c1aa0d29cfb926decd44/maintainability)](https://codeclimate.com/github/9sako6/work_timer/maintainability)
 
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/work_timer`. To experiment with that code, run `bin/console` for an interactive prompt.
-
 This gem measures time.
 ![demo](demo.gif)
 ## Installation
