@@ -33,7 +33,7 @@ If you don't specify a logfile, your working log is saved in ```work_timer_defau
 
 You can specify the file to save your log:
 ```
-$ ./work_timer.rb <LOG_FILE_PATH>
+$ work_timer <LOG_FILE_PATH>
 ```
 
 
