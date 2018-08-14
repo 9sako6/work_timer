@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "work_timer"
   spec.version       = WorkTimer::VERSION
   spec.authors       = ["9sako6"]
-  spec.email         = ["TODO: Write your email address"]
+  spec.email         = ["ureshi.hazukashi.gyahi@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{gem to measure working time}
+  spec.description   = %q{A gem that measures your working time.}
+  spec.homepage      = "https://github.com/9sako6/work_timer"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
