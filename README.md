@@ -4,7 +4,9 @@
 
 
 This gem measures time.
+
 ![demo](demo.gif)
+
 ## Installation
 
 Add this line to your application's Gemfile:
