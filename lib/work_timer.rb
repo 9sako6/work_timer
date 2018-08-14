@@ -36,8 +36,8 @@ module WorkTimer
 
     def record_time
       File.open(@fileName, "a+") do |f|
-        # 標準で09:00:00となるのを00:00:00にするために60*60*15足してる
-        workTime = (@endTime-@startTime.to_i+60*60*15).strftime("%T")
+        timezone = Time.now.strftime("%z").to_i/100
+        workTime = (@endTime-@startTime.to_i+60*60*(24-timezone)).strftime("%T")
         f.puts @startTime, @endTime, workTime
       end
     end
