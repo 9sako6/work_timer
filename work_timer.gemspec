@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "work_timer"
   spec.version       = WorkTimer::VERSION
   spec.authors       = ["9sako6"]
-  spec.email         = ["ureshi.hazukashi.gyahi@gmail.com"]
+  spec.email         = [""]
 
   spec.summary       = %q{gem to measure working time}
   spec.description   = %q{A gem that measures your working time.}
