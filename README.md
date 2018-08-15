@@ -2,6 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/c1aa0d29cfb926decd44/maintainability)](https://codeclimate.com/github/9sako6/work_timer/maintainability)
 
+[![Gem Version](https://badge.fury.io/rb/work_timer.svg)](https://badge.fury.io/rb/work_timer)
 
 This gem measures the time.
 
