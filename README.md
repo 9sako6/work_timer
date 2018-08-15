@@ -29,13 +29,30 @@ Or install it yourself as:
 ```
 $ work_timer
 ```
-If you don't specify a logfile, your working log is saved in ```work_timer_default.log```.
 
-You can specify the file to save your log:
+Example:
+
+```
+$ work_timer
+quit : 'q'
+00:00:03                # counter
+```
+
+You can save the time in a log file:
+
 ```
 $ work_timer <LOG_FILE_PATH>
 ```
 
+Example:
+```
+$ work_timer default.log
+quit : 'q'
+total: 00:00:10         # the total time recorded in the log file
+00:00:04                # counter
+save : default.log
+total: 00:00:14
+```
 
 **Quit:**
 input ```q```

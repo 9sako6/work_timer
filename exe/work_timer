@@ -3,18 +3,28 @@
 require 'work_timer'
 require "io/console" # 改行なしで'q'を取得するのに必要
 
-# 作業記録を保存するログファイル
-fileName = ARGV[0] ? ARGV[0] : "work_timer_default.log"
-myWork = WorkTimer::Work.new(fileName)
-puts "quit : 'q'"
-puts "total: " + myWork.total_time
-puts "save : " + fileName
-# 作業時間をリアルタイム表示
-myWork.view
-myWork.start_work
-# 'q'が入力されたら作業時間カウント終了
-while STDIN.getch != 'q'; end
-puts
-myWork.end_work
-myWork.record_time
-puts "total: " + myWork.total_time
+def setWork(myWorkObj)
+  # 作業時間をリアルタイム表示
+  myWorkObj.view
+  myWorkObj.start_work
+  # 'q'が入力されたら作業時間カウント終了
+  while STDIN.getch != 'q'; end
+  puts
+  myWorkObj.end_work
+end
+
+if ARGV[0]
+  # 作業記録を保存するログファイル
+  fileName = ARGV[0]
+  myWork = WorkTimer::Work.new(fileName)
+  puts "quit : 'q'"
+  puts "total: " + myWork.total_time
+  setWork(myWork)
+  puts "save : " + fileName
+  myWork.record_time
+  puts "total: " + myWork.total_time
+else
+  myWork = WorkTimer::Work.new("EMPTY")
+  puts "quit : 'q'"
+  setWork(myWork)
+end
