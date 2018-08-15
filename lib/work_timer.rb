@@ -49,6 +49,7 @@ module WorkTimer
           sleep 1
         end
       end
+      true
     end
 
     private
