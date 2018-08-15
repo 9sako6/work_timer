@@ -1,21 +1,3 @@
-require 'spec_helper.rb'
-require 'simplecov'
-require 'codeclimate-test-reporter'
-
-dir = File.join(ENV['CIRCLE_ARTIFACTS'] || 'build', 'coverage')
-SimpleCov.coverage_dir(dir)
-
-SimpleCov.start do
-  # /vendor/,/spec/ を集計対象から除外
-  add_filter '/vendor/'
-  add_filter '/spec/'
-
-  formatter SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    CodeClimate::TestReporter::Formatter
-  ]
-end
-
 RSpec.describe WorkTimer do
   it "has a version number" do
     expect(WorkTimer::VERSION).not_to be nil
