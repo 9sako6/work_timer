@@ -5,7 +5,18 @@
 
 This gem measures the time.
 
-![demo](demo.gif)
+**Default mode:**
+
+work_timer measures the time.
+
+![demo1](figs/demo1.gif)
+
+
+**Recording mode:**
+
+work_timer measures the time and saves it in the log file.
+
+![demo2](figs/demo2.gif)
 
 ## Installation
 
