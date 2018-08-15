@@ -1,3 +1,4 @@
+require 'spec_helper.rb'
 require 'simplecov'
 require 'codeclimate-test-reporter'
 # カバレッジレポートの出力先を指定
