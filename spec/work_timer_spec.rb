@@ -1,9 +1,7 @@
 require 'spec_helper.rb'
 require 'simplecov'
 require 'codeclimate-test-reporter'
-# カバレッジレポートの出力先を指定
-# Circle CIで実行する場合は、ビルド成果物置き場に、
-# ローカルで実行する場合は、 ./build/coverage に作成します。
+
 dir = File.join(ENV['CIRCLE_ARTIFACTS'] || 'build', 'coverage')
 SimpleCov.coverage_dir(dir)
 
