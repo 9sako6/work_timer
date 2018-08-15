@@ -36,9 +36,8 @@ module WorkTimer
 
     def record_time
       File.open(@fileName, "a+") do |f|
-        timezone = Time.now.strftime("%z").to_i/100
-        workTime = (@endTime-@startTime.to_i+60*60*(24-timezone)).strftime("%T")
-        f.puts @startTime, @endTime, workTime
+        workTime = (@endTime.gmtime-@startTime.gmtime.to_i).strftime("%T")
+        f.puts @startTime.localtime, @endTime.localtime, workTime
       end
     end
 
