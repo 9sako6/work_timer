@@ -1,3 +1,22 @@
+require 'simplecov'
+require 'codeclimate-test-reporter'
+# カバレッジレポートの出力先を指定
+# Circle CIで実行する場合は、ビルド成果物置き場に、
+# ローカルで実行する場合は、 ./build/coverage に作成します。
+dir = File.join(ENV['CIRCLE_ARTIFACTS'] || 'build', 'coverage')
+SimpleCov.coverage_dir(dir)
+
+SimpleCov.start do
+  # /vendor/,/spec/ を集計対象から除外
+  add_filter '/vendor/'
+  add_filter '/spec/'
+
+  formatter SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    CodeClimate::TestReporter::Formatter
+  ]
+end
+
 RSpec.describe WorkTimer do
   it "has a version number" do
     expect(WorkTimer::VERSION).not_to be nil
