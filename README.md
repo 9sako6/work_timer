@@ -5,6 +5,9 @@
 
 This gem measures the time.
 
+[work_timer | RubyGems.org](https://rubygems.org/gems/work_timer)
+
+
 **Default mode:**
 
 work_timer measures the time.
