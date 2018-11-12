@@ -45,7 +45,7 @@ module WorkTimer
       @view_thread = Thread.new do
         loop do
           workingTime = Time.now - @startTime.to_i
-          print "\r\033[32m#{(workingTime+60*60*15).strftime("%T")}\033[30m"
+          print "\r\033[32m#{(workingTime+60*60*15).strftime("%T")}\033[0m"
           sleep 1
         end
       end
