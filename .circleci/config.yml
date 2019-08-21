@@ -52,4 +52,12 @@ jobs: # a collection of steps
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
+      - store_artifacts:
+          # テスト結果をtest-resultsディレクトリに吐き出す
+          path: test_results
+          destination: test-results
+      - store_artifacts:
+          # カバレッジの結果をcoverage-resultsディレクトリに吐き出す
+          path: coverage
+          destination: coverage-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
