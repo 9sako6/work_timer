@@ -1,63 +1,63 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    parallelism: 3 # run three instances of this job in parallel
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.4.2-jessie-node # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.4.1-node-browsers
 
-      - run:
-          name: install Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
 
-      # Which version of bundler?
-      - run:
-          name: Which bundler?
-          command: bundle -v
+    working_directory: ~/repo
 
-      # Restore bundle cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+    steps:
+      - checkout
+
+      # Download and cache dependencies
       - restore_cache:
           keys:
-            - gem-sample-{{ checksum "Gemfile.lock" }}
-            - gem-sample-
-
-      - run: # Install Ruby dependencies
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
-
-      # Store bundle cache for Ruby dependencies
-      - save_cache:
-          key: gem-sample-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run:
-          name: Run rspec in parallel
+          name: install dependencies
           command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      # Save test results for timing analysis
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test_results
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
       - store_artifacts:
-          # テスト結果をtest-resultsディレクトリに吐き出す
-          path: test_results
+          path: /tmp/test-results
           destination: test-results
-      - store_artifacts:
-          # カバレッジの結果をcoverage-resultsディレクトリに吐き出す
-          path: coverage
-          destination: coverage-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
